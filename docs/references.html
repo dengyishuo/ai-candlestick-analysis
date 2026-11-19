@@ -1,598 +1,65 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
-<head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>参考文献 | AI时代的蜡烛图分析</title>
-  <meta name="description" content="介绍在 AI 辅助下的蜡烛图分析技术在投资领域的应用及其 R 语言实现。" />
-  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="参考文献 | AI时代的蜡烛图分析" />
-  <meta property="og:type" content="book" />
-  
-  <meta property="og:description" content="介绍在 AI 辅助下的蜡烛图分析技术在投资领域的应用及其 R 语言实现。" />
-  <meta name="github-repo" content="dengyishuo/ai-candlestick-analysis" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="参考文献 | AI时代的蜡烛图分析" />
-  
-  <meta name="twitter:description" content="介绍在 AI 辅助下的蜡烛图分析技术在投资领域的应用及其 R 语言实现。" />
-  
-
-<meta name="author" content="淮午" />
-
-
-<meta name="date" content="2026-08-15" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="sound.html"/>
-
-<script src="libs/jquery/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections/anchor-sections.js"></script>
-
-
-<style type="text/css">
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
-
-<link rel="stylesheet" href="css/style.css" type="text/css" />
-</head>
-
-<body>
-
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">AI时代的蜡烛图分析</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a>
-<ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#%E8%87%B4%E8%B0%A2"><i class="fa fa-check"></i>致谢</a></li>
-</ul></li>
-<li class="part"><span><b>I 基础：从图形语言到可检验证据</b></span></li>
-<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> 蜡烛图：从图形语言到可检验证据</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#%E9%97%AE%E9%A2%98%E7%8E%B0%E5%9C%BA"><i class="fa fa-check"></i><b>1.1</b> 问题现场</a></li>
-<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87"><i class="fa fa-check"></i><b>1.2</b> 学习目标</a></li>
-<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#%E7%BB%8F%E5%85%B8%E5%BD%A2%E6%80%81%E4%B8%8E%E5%B8%82%E5%9C%BA%E6%9C%BA%E5%88%B6"><i class="fa fa-check"></i><b>1.3</b> 经典形态与市场机制</a></li>
-<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#%E5%8F%AF%E8%AE%A1%E7%AE%97%E5%AE%9A%E4%B9%89"><i class="fa fa-check"></i><b>1.4</b> 可计算定义</a></li>
-<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#%E7%A0%94%E7%A9%B6%E8%AE%BE%E8%AE%A1"><i class="fa fa-check"></i><b>1.5</b> 研究设计</a></li>
-<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#r%E5%AE%9E%E7%8E%B0"><i class="fa fa-check"></i><b>1.6</b> R实现</a></li>
-<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#python%E5%AE%9E%E7%8E%B0"><i class="fa fa-check"></i><b>1.7</b> Python实现</a></li>
-<li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#%E5%9B%BE%E5%BD%A2%E8%AF%8A%E6%96%AD"><i class="fa fa-check"></i><b>1.8</b> 图形诊断</a></li>
-<li class="chapter" data-level="1.9" data-path="intro.html"><a href="intro.html#%E8%AF%81%E6%8D%AE%E4%B8%8E%E7%A8%B3%E5%81%A5%E6%80%A7"><i class="fa fa-check"></i><b>1.9</b> 证据与稳健性</a></li>
-<li class="chapter" data-level="1.10" data-path="intro.html"><a href="intro.html#ai%E5%8D%8F%E4%BD%9C%E5%AE%9E%E9%AA%8C%E5%AE%A4"><i class="fa fa-check"></i><b>1.10</b> AI协作实验室</a></li>
-<li class="chapter" data-level="1.11" data-path="intro.html"><a href="intro.html#%E5%A4%B1%E6%95%88%E6%9D%A1%E4%BB%B6%E4%B8%8E%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA"><i class="fa fa-check"></i><b>1.11</b> 失效条件与常见误区</a></li>
-<li class="chapter" data-level="1.12" data-path="intro.html"><a href="intro.html#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0"><i class="fa fa-check"></i><b>1.12</b> 本章小结与练习</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="candle.html"><a href="candle.html"><i class="fa fa-check"></i><b>2</b> R与Python绘制可审计的蜡烛图</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="candle.html"><a href="candle.html#%E9%97%AE%E9%A2%98%E7%8E%B0%E5%9C%BA-1"><i class="fa fa-check"></i><b>2.1</b> 问题现场</a></li>
-<li class="chapter" data-level="2.2" data-path="candle.html"><a href="candle.html#%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87-1"><i class="fa fa-check"></i><b>2.2</b> 学习目标</a></li>
-<li class="chapter" data-level="2.3" data-path="candle.html"><a href="candle.html#%E7%BB%8F%E5%85%B8%E5%BD%A2%E6%80%81%E4%B8%8E%E5%B8%82%E5%9C%BA%E6%9C%BA%E5%88%B6-1"><i class="fa fa-check"></i><b>2.3</b> 经典形态与市场机制</a></li>
-<li class="chapter" data-level="2.4" data-path="candle.html"><a href="candle.html#%E5%8F%AF%E8%AE%A1%E7%AE%97%E5%AE%9A%E4%B9%89-1"><i class="fa fa-check"></i><b>2.4</b> 可计算定义</a></li>
-<li class="chapter" data-level="2.5" data-path="candle.html"><a href="candle.html#%E7%A0%94%E7%A9%B6%E8%AE%BE%E8%AE%A1-1"><i class="fa fa-check"></i><b>2.5</b> 研究设计</a></li>
-<li class="chapter" data-level="2.6" data-path="candle.html"><a href="candle.html#r%E5%AE%9E%E7%8E%B0-1"><i class="fa fa-check"></i><b>2.6</b> R实现</a></li>
-<li class="chapter" data-level="2.7" data-path="candle.html"><a href="candle.html#python%E5%AE%9E%E7%8E%B0-1"><i class="fa fa-check"></i><b>2.7</b> Python实现</a></li>
-<li class="chapter" data-level="2.8" data-path="candle.html"><a href="candle.html#%E5%9B%BE%E5%BD%A2%E8%AF%8A%E6%96%AD-1"><i class="fa fa-check"></i><b>2.8</b> 图形诊断</a></li>
-<li class="chapter" data-level="2.9" data-path="candle.html"><a href="candle.html#%E8%AF%81%E6%8D%AE%E4%B8%8E%E7%A8%B3%E5%81%A5%E6%80%A7-1"><i class="fa fa-check"></i><b>2.9</b> 证据与稳健性</a></li>
-<li class="chapter" data-level="2.10" data-path="candle.html"><a href="candle.html#ai%E5%8D%8F%E4%BD%9C%E5%AE%9E%E9%AA%8C%E5%AE%A4-1"><i class="fa fa-check"></i><b>2.10</b> AI协作实验室</a></li>
-<li class="chapter" data-level="2.11" data-path="candle.html"><a href="candle.html#%E5%A4%B1%E6%95%88%E6%9D%A1%E4%BB%B6%E4%B8%8E%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA-1"><i class="fa fa-check"></i><b>2.11</b> 失效条件与常见误区</a></li>
-<li class="chapter" data-level="2.12" data-path="candle.html"><a href="candle.html#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0-1"><i class="fa fa-check"></i><b>2.12</b> 本章小结与练习</a></li>
-</ul></li>
-<li class="part"><span><b>II 形态：按K线数量组织的结构语言</b></span></li>
-<li class="chapter" data-level="3" data-path="single-candle.html"><a href="single-candle.html"><i class="fa fa-check"></i><b>3</b> 单根K线：压力、拒绝与失衡</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="single-candle.html"><a href="single-candle.html#%E9%97%AE%E9%A2%98%E7%8E%B0%E5%9C%BA-2"><i class="fa fa-check"></i><b>3.1</b> 问题现场</a></li>
-<li class="chapter" data-level="3.2" data-path="single-candle.html"><a href="single-candle.html#%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87-2"><i class="fa fa-check"></i><b>3.2</b> 学习目标</a></li>
-<li class="chapter" data-level="3.3" data-path="single-candle.html"><a href="single-candle.html#%E7%BB%8F%E5%85%B8%E5%BD%A2%E6%80%81%E4%B8%8E%E5%B8%82%E5%9C%BA%E6%9C%BA%E5%88%B6-2"><i class="fa fa-check"></i><b>3.3</b> 经典形态与市场机制</a>
-<ul>
-<li class="chapter" data-level="3.3.1" data-path="single-candle.html"><a href="single-candle.html#%E7%AB%A0%E5%86%85%E6%96%B9%E5%90%91%E7%B4%A2%E5%BC%95"><i class="fa fa-check"></i><b>3.3.1</b> 章内方向索引</a></li>
-</ul></li>
-<li class="chapter" data-level="3.4" data-path="single-candle.html"><a href="single-candle.html#%E5%8F%AF%E8%AE%A1%E7%AE%97%E5%AE%9A%E4%B9%89-2"><i class="fa fa-check"></i><b>3.4</b> 可计算定义</a></li>
-<li class="chapter" data-level="3.5" data-path="single-candle.html"><a href="single-candle.html#%E7%A0%94%E7%A9%B6%E8%AE%BE%E8%AE%A1-2"><i class="fa fa-check"></i><b>3.5</b> 研究设计</a></li>
-<li class="chapter" data-level="3.6" data-path="single-candle.html"><a href="single-candle.html#r%E5%AE%9E%E7%8E%B0-2"><i class="fa fa-check"></i><b>3.6</b> R实现</a></li>
-<li class="chapter" data-level="3.7" data-path="single-candle.html"><a href="single-candle.html#python%E5%AE%9E%E7%8E%B0-2"><i class="fa fa-check"></i><b>3.7</b> Python实现</a></li>
-<li class="chapter" data-level="3.8" data-path="single-candle.html"><a href="single-candle.html#%E5%9B%BE%E5%BD%A2%E8%AF%8A%E6%96%AD-2"><i class="fa fa-check"></i><b>3.8</b> 图形诊断</a></li>
-<li class="chapter" data-level="3.9" data-path="single-candle.html"><a href="single-candle.html#%E8%AF%81%E6%8D%AE%E4%B8%8E%E7%A8%B3%E5%81%A5%E6%80%A7-2"><i class="fa fa-check"></i><b>3.9</b> 证据与稳健性</a></li>
-<li class="chapter" data-level="3.10" data-path="single-candle.html"><a href="single-candle.html#ai%E5%8D%8F%E4%BD%9C%E5%AE%9E%E9%AA%8C%E5%AE%A4-2"><i class="fa fa-check"></i><b>3.10</b> AI协作实验室</a></li>
-<li class="chapter" data-level="3.11" data-path="single-candle.html"><a href="single-candle.html#%E5%A4%B1%E6%95%88%E6%9D%A1%E4%BB%B6%E4%B8%8E%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA-2"><i class="fa fa-check"></i><b>3.11</b> 失效条件与常见误区</a></li>
-<li class="chapter" data-level="3.12" data-path="single-candle.html"><a href="single-candle.html#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0-2"><i class="fa fa-check"></i><b>3.12</b> 本章小结与练习</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="two-candle.html"><a href="two-candle.html"><i class="fa fa-check"></i><b>4</b> 双根K线：吞没、孕线与反击</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="two-candle.html"><a href="two-candle.html#%E9%97%AE%E9%A2%98%E7%8E%B0%E5%9C%BA-3"><i class="fa fa-check"></i><b>4.1</b> 问题现场</a></li>
-<li class="chapter" data-level="4.2" data-path="two-candle.html"><a href="two-candle.html#%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87-3"><i class="fa fa-check"></i><b>4.2</b> 学习目标</a></li>
-<li class="chapter" data-level="4.3" data-path="two-candle.html"><a href="two-candle.html#%E7%BB%8F%E5%85%B8%E5%BD%A2%E6%80%81%E4%B8%8E%E5%B8%82%E5%9C%BA%E6%9C%BA%E5%88%B6-3"><i class="fa fa-check"></i><b>4.3</b> 经典形态与市场机制</a>
-<ul>
-<li class="chapter" data-level="4.3.1" data-path="two-candle.html"><a href="two-candle.html#%E7%AB%A0%E5%86%85%E6%96%B9%E5%90%91%E7%B4%A2%E5%BC%95-1"><i class="fa fa-check"></i><b>4.3.1</b> 章内方向索引</a></li>
-</ul></li>
-<li class="chapter" data-level="4.4" data-path="two-candle.html"><a href="two-candle.html#%E5%8F%AF%E8%AE%A1%E7%AE%97%E5%AE%9A%E4%B9%89-3"><i class="fa fa-check"></i><b>4.4</b> 可计算定义</a></li>
-<li class="chapter" data-level="4.5" data-path="two-candle.html"><a href="two-candle.html#%E7%A0%94%E7%A9%B6%E8%AE%BE%E8%AE%A1-3"><i class="fa fa-check"></i><b>4.5</b> 研究设计</a></li>
-<li class="chapter" data-level="4.6" data-path="two-candle.html"><a href="two-candle.html#r%E5%AE%9E%E7%8E%B0-3"><i class="fa fa-check"></i><b>4.6</b> R实现</a></li>
-<li class="chapter" data-level="4.7" data-path="two-candle.html"><a href="two-candle.html#python%E5%AE%9E%E7%8E%B0-3"><i class="fa fa-check"></i><b>4.7</b> Python实现</a></li>
-<li class="chapter" data-level="4.8" data-path="two-candle.html"><a href="two-candle.html#%E5%9B%BE%E5%BD%A2%E8%AF%8A%E6%96%AD-3"><i class="fa fa-check"></i><b>4.8</b> 图形诊断</a></li>
-<li class="chapter" data-level="4.9" data-path="two-candle.html"><a href="two-candle.html#%E8%AF%81%E6%8D%AE%E4%B8%8E%E7%A8%B3%E5%81%A5%E6%80%A7-3"><i class="fa fa-check"></i><b>4.9</b> 证据与稳健性</a></li>
-<li class="chapter" data-level="4.10" data-path="two-candle.html"><a href="two-candle.html#ai%E5%8D%8F%E4%BD%9C%E5%AE%9E%E9%AA%8C%E5%AE%A4-3"><i class="fa fa-check"></i><b>4.10</b> AI协作实验室</a></li>
-<li class="chapter" data-level="4.11" data-path="two-candle.html"><a href="two-candle.html#%E5%A4%B1%E6%95%88%E6%9D%A1%E4%BB%B6%E4%B8%8E%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA-3"><i class="fa fa-check"></i><b>4.11</b> 失效条件与常见误区</a></li>
-<li class="chapter" data-level="4.12" data-path="two-candle.html"><a href="two-candle.html#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0-3"><i class="fa fa-check"></i><b>4.12</b> 本章小结与练习</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="multi-candle.html"><a href="multi-candle.html"><i class="fa fa-check"></i><b>5</b> 三根及多根K线：序列与确认</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="multi-candle.html"><a href="multi-candle.html#%E9%97%AE%E9%A2%98%E7%8E%B0%E5%9C%BA-4"><i class="fa fa-check"></i><b>5.1</b> 问题现场</a></li>
-<li class="chapter" data-level="5.2" data-path="multi-candle.html"><a href="multi-candle.html#%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87-4"><i class="fa fa-check"></i><b>5.2</b> 学习目标</a></li>
-<li class="chapter" data-level="5.3" data-path="multi-candle.html"><a href="multi-candle.html#%E7%BB%8F%E5%85%B8%E5%BD%A2%E6%80%81%E4%B8%8E%E5%B8%82%E5%9C%BA%E6%9C%BA%E5%88%B6-4"><i class="fa fa-check"></i><b>5.3</b> 经典形态与市场机制</a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="multi-candle.html"><a href="multi-candle.html#%E7%AB%A0%E5%86%85%E6%96%B9%E5%90%91%E7%B4%A2%E5%BC%95-2"><i class="fa fa-check"></i><b>5.3.1</b> 章内方向索引</a></li>
-</ul></li>
-<li class="chapter" data-level="5.4" data-path="multi-candle.html"><a href="multi-candle.html#%E5%8F%AF%E8%AE%A1%E7%AE%97%E5%AE%9A%E4%B9%89-4"><i class="fa fa-check"></i><b>5.4</b> 可计算定义</a></li>
-<li class="chapter" data-level="5.5" data-path="multi-candle.html"><a href="multi-candle.html#%E7%A0%94%E7%A9%B6%E8%AE%BE%E8%AE%A1-4"><i class="fa fa-check"></i><b>5.5</b> 研究设计</a></li>
-<li class="chapter" data-level="5.6" data-path="multi-candle.html"><a href="multi-candle.html#r%E5%AE%9E%E7%8E%B0-4"><i class="fa fa-check"></i><b>5.6</b> R实现</a></li>
-<li class="chapter" data-level="5.7" data-path="multi-candle.html"><a href="multi-candle.html#python%E5%AE%9E%E7%8E%B0-4"><i class="fa fa-check"></i><b>5.7</b> Python实现</a></li>
-<li class="chapter" data-level="5.8" data-path="multi-candle.html"><a href="multi-candle.html#%E5%9B%BE%E5%BD%A2%E8%AF%8A%E6%96%AD-4"><i class="fa fa-check"></i><b>5.8</b> 图形诊断</a></li>
-<li class="chapter" data-level="5.9" data-path="multi-candle.html"><a href="multi-candle.html#%E8%AF%81%E6%8D%AE%E4%B8%8E%E7%A8%B3%E5%81%A5%E6%80%A7-4"><i class="fa fa-check"></i><b>5.9</b> 证据与稳健性</a></li>
-<li class="chapter" data-level="5.10" data-path="multi-candle.html"><a href="multi-candle.html#ai%E5%8D%8F%E4%BD%9C%E5%AE%9E%E9%AA%8C%E5%AE%A4-4"><i class="fa fa-check"></i><b>5.10</b> AI协作实验室</a></li>
-<li class="chapter" data-level="5.11" data-path="multi-candle.html"><a href="multi-candle.html#%E5%A4%B1%E6%95%88%E6%9D%A1%E4%BB%B6%E4%B8%8E%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA-4"><i class="fa fa-check"></i><b>5.11</b> 失效条件与常见误区</a></li>
-<li class="chapter" data-level="5.12" data-path="multi-candle.html"><a href="multi-candle.html#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0-4"><i class="fa fa-check"></i><b>5.12</b> 本章小结与练习</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="gap-continuation.html"><a href="gap-continuation.html"><i class="fa fa-check"></i><b>6</b> 跳空与持续形态</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="gap-continuation.html"><a href="gap-continuation.html#%E9%97%AE%E9%A2%98%E7%8E%B0%E5%9C%BA-5"><i class="fa fa-check"></i><b>6.1</b> 问题现场</a></li>
-<li class="chapter" data-level="6.2" data-path="gap-continuation.html"><a href="gap-continuation.html#%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87-5"><i class="fa fa-check"></i><b>6.2</b> 学习目标</a></li>
-<li class="chapter" data-level="6.3" data-path="gap-continuation.html"><a href="gap-continuation.html#%E7%BB%8F%E5%85%B8%E5%BD%A2%E6%80%81%E4%B8%8E%E5%B8%82%E5%9C%BA%E6%9C%BA%E5%88%B6-5"><i class="fa fa-check"></i><b>6.3</b> 经典形态与市场机制</a></li>
-<li class="chapter" data-level="6.4" data-path="gap-continuation.html"><a href="gap-continuation.html#%E5%8F%AF%E8%AE%A1%E7%AE%97%E5%AE%9A%E4%B9%89-5"><i class="fa fa-check"></i><b>6.4</b> 可计算定义</a></li>
-<li class="chapter" data-level="6.5" data-path="gap-continuation.html"><a href="gap-continuation.html#%E7%A0%94%E7%A9%B6%E8%AE%BE%E8%AE%A1-5"><i class="fa fa-check"></i><b>6.5</b> 研究设计</a></li>
-<li class="chapter" data-level="6.6" data-path="gap-continuation.html"><a href="gap-continuation.html#r%E5%AE%9E%E7%8E%B0-5"><i class="fa fa-check"></i><b>6.6</b> R实现</a></li>
-<li class="chapter" data-level="6.7" data-path="gap-continuation.html"><a href="gap-continuation.html#python%E5%AE%9E%E7%8E%B0-5"><i class="fa fa-check"></i><b>6.7</b> Python实现</a></li>
-<li class="chapter" data-level="6.8" data-path="gap-continuation.html"><a href="gap-continuation.html#%E5%9B%BE%E5%BD%A2%E8%AF%8A%E6%96%AD-5"><i class="fa fa-check"></i><b>6.8</b> 图形诊断</a></li>
-<li class="chapter" data-level="6.9" data-path="gap-continuation.html"><a href="gap-continuation.html#%E8%AF%81%E6%8D%AE%E4%B8%8E%E7%A8%B3%E5%81%A5%E6%80%A7-5"><i class="fa fa-check"></i><b>6.9</b> 证据与稳健性</a></li>
-<li class="chapter" data-level="6.10" data-path="gap-continuation.html"><a href="gap-continuation.html#ai%E5%8D%8F%E4%BD%9C%E5%AE%9E%E9%AA%8C%E5%AE%A4-5"><i class="fa fa-check"></i><b>6.10</b> AI协作实验室</a></li>
-<li class="chapter" data-level="6.11" data-path="gap-continuation.html"><a href="gap-continuation.html#%E5%A4%B1%E6%95%88%E6%9D%A1%E4%BB%B6%E4%B8%8E%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA-5"><i class="fa fa-check"></i><b>6.11</b> 失效条件与常见误区</a></li>
-<li class="chapter" data-level="6.12" data-path="gap-continuation.html"><a href="gap-continuation.html#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0-5"><i class="fa fa-check"></i><b>6.12</b> 本章小结与练习</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="doji-failure.html"><a href="doji-failure.html"><i class="fa fa-check"></i><b>7</b> 十字线、犹豫与失败信号</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="doji-failure.html"><a href="doji-failure.html#%E9%97%AE%E9%A2%98%E7%8E%B0%E5%9C%BA-6"><i class="fa fa-check"></i><b>7.1</b> 问题现场</a></li>
-<li class="chapter" data-level="7.2" data-path="doji-failure.html"><a href="doji-failure.html#%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87-6"><i class="fa fa-check"></i><b>7.2</b> 学习目标</a></li>
-<li class="chapter" data-level="7.3" data-path="doji-failure.html"><a href="doji-failure.html#%E7%BB%8F%E5%85%B8%E5%BD%A2%E6%80%81%E4%B8%8E%E5%B8%82%E5%9C%BA%E6%9C%BA%E5%88%B6-6"><i class="fa fa-check"></i><b>7.3</b> 经典形态与市场机制</a></li>
-<li class="chapter" data-level="7.4" data-path="doji-failure.html"><a href="doji-failure.html#%E5%8F%AF%E8%AE%A1%E7%AE%97%E5%AE%9A%E4%B9%89-6"><i class="fa fa-check"></i><b>7.4</b> 可计算定义</a></li>
-<li class="chapter" data-level="7.5" data-path="doji-failure.html"><a href="doji-failure.html#%E7%A0%94%E7%A9%B6%E8%AE%BE%E8%AE%A1-6"><i class="fa fa-check"></i><b>7.5</b> 研究设计</a></li>
-<li class="chapter" data-level="7.6" data-path="doji-failure.html"><a href="doji-failure.html#r%E5%AE%9E%E7%8E%B0-6"><i class="fa fa-check"></i><b>7.6</b> R实现</a></li>
-<li class="chapter" data-level="7.7" data-path="doji-failure.html"><a href="doji-failure.html#python%E5%AE%9E%E7%8E%B0-6"><i class="fa fa-check"></i><b>7.7</b> Python实现</a></li>
-<li class="chapter" data-level="7.8" data-path="doji-failure.html"><a href="doji-failure.html#%E5%9B%BE%E5%BD%A2%E8%AF%8A%E6%96%AD-6"><i class="fa fa-check"></i><b>7.8</b> 图形诊断</a></li>
-<li class="chapter" data-level="7.9" data-path="doji-failure.html"><a href="doji-failure.html#%E8%AF%81%E6%8D%AE%E4%B8%8E%E7%A8%B3%E5%81%A5%E6%80%A7-6"><i class="fa fa-check"></i><b>7.9</b> 证据与稳健性</a></li>
-<li class="chapter" data-level="7.10" data-path="doji-failure.html"><a href="doji-failure.html#ai%E5%8D%8F%E4%BD%9C%E5%AE%9E%E9%AA%8C%E5%AE%A4-6"><i class="fa fa-check"></i><b>7.10</b> AI协作实验室</a></li>
-<li class="chapter" data-level="7.11" data-path="doji-failure.html"><a href="doji-failure.html#%E5%A4%B1%E6%95%88%E6%9D%A1%E4%BB%B6%E4%B8%8E%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA-6"><i class="fa fa-check"></i><b>7.11</b> 失效条件与常见误区</a></li>
-<li class="chapter" data-level="7.12" data-path="doji-failure.html"><a href="doji-failure.html#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0-6"><i class="fa fa-check"></i><b>7.12</b> 本章小结与练习</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="pattern-dictionary.html"><a href="pattern-dictionary.html"><i class="fa fa-check"></i><b>8</b> 形态字典与统一扫描</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="pattern-dictionary.html"><a href="pattern-dictionary.html#%E9%97%AE%E9%A2%98%E7%8E%B0%E5%9C%BA-7"><i class="fa fa-check"></i><b>8.1</b> 问题现场</a></li>
-<li class="chapter" data-level="8.2" data-path="pattern-dictionary.html"><a href="pattern-dictionary.html#%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87-7"><i class="fa fa-check"></i><b>8.2</b> 学习目标</a></li>
-<li class="chapter" data-level="8.3" data-path="pattern-dictionary.html"><a href="pattern-dictionary.html#%E7%BB%8F%E5%85%B8%E5%BD%A2%E6%80%81%E4%B8%8E%E5%B8%82%E5%9C%BA%E6%9C%BA%E5%88%B6-7"><i class="fa fa-check"></i><b>8.3</b> 经典形态与市场机制</a></li>
-<li class="chapter" data-level="8.4" data-path="pattern-dictionary.html"><a href="pattern-dictionary.html#%E5%8F%AF%E8%AE%A1%E7%AE%97%E5%AE%9A%E4%B9%89-7"><i class="fa fa-check"></i><b>8.4</b> 可计算定义</a></li>
-<li class="chapter" data-level="8.5" data-path="pattern-dictionary.html"><a href="pattern-dictionary.html#%E7%A0%94%E7%A9%B6%E8%AE%BE%E8%AE%A1-7"><i class="fa fa-check"></i><b>8.5</b> 研究设计</a></li>
-<li class="chapter" data-level="8.6" data-path="pattern-dictionary.html"><a href="pattern-dictionary.html#r%E5%AE%9E%E7%8E%B0-7"><i class="fa fa-check"></i><b>8.6</b> R实现</a></li>
-<li class="chapter" data-level="8.7" data-path="pattern-dictionary.html"><a href="pattern-dictionary.html#python%E5%AE%9E%E7%8E%B0-7"><i class="fa fa-check"></i><b>8.7</b> Python实现</a></li>
-<li class="chapter" data-level="8.8" data-path="pattern-dictionary.html"><a href="pattern-dictionary.html#%E5%9B%BE%E5%BD%A2%E8%AF%8A%E6%96%AD-7"><i class="fa fa-check"></i><b>8.8</b> 图形诊断</a></li>
-<li class="chapter" data-level="8.9" data-path="pattern-dictionary.html"><a href="pattern-dictionary.html#%E8%AF%81%E6%8D%AE%E4%B8%8E%E7%A8%B3%E5%81%A5%E6%80%A7-7"><i class="fa fa-check"></i><b>8.9</b> 证据与稳健性</a></li>
-<li class="chapter" data-level="8.10" data-path="pattern-dictionary.html"><a href="pattern-dictionary.html#ai%E5%8D%8F%E4%BD%9C%E5%AE%9E%E9%AA%8C%E5%AE%A4-7"><i class="fa fa-check"></i><b>8.10</b> AI协作实验室</a></li>
-<li class="chapter" data-level="8.11" data-path="pattern-dictionary.html"><a href="pattern-dictionary.html#%E5%A4%B1%E6%95%88%E6%9D%A1%E4%BB%B6%E4%B8%8E%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA-7"><i class="fa fa-check"></i><b>8.11</b> 失效条件与常见误区</a></li>
-<li class="chapter" data-level="8.12" data-path="pattern-dictionary.html"><a href="pattern-dictionary.html#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0-7"><i class="fa fa-check"></i><b>8.12</b> 本章小结与练习</a></li>
-</ul></li>
-<li class="part"><span><b>III 证据：从方向标签到条件概率</b></span></li>
-<li class="chapter" data-level="9" data-path="pattern-scoring.html"><a href="pattern-scoring.html"><i class="fa fa-check"></i><b>9</b> 形态汇聚、冲突与概率评分</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="pattern-scoring.html"><a href="pattern-scoring.html#%E9%97%AE%E9%A2%98%E7%8E%B0%E5%9C%BA-8"><i class="fa fa-check"></i><b>9.1</b> 问题现场</a></li>
-<li class="chapter" data-level="9.2" data-path="pattern-scoring.html"><a href="pattern-scoring.html#%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87-8"><i class="fa fa-check"></i><b>9.2</b> 学习目标</a></li>
-<li class="chapter" data-level="9.3" data-path="pattern-scoring.html"><a href="pattern-scoring.html#%E7%BB%8F%E5%85%B8%E5%BD%A2%E6%80%81%E4%B8%8E%E5%B8%82%E5%9C%BA%E6%9C%BA%E5%88%B6-8"><i class="fa fa-check"></i><b>9.3</b> 经典形态与市场机制</a></li>
-<li class="chapter" data-level="9.4" data-path="pattern-scoring.html"><a href="pattern-scoring.html#%E5%8F%AF%E8%AE%A1%E7%AE%97%E5%AE%9A%E4%B9%89-8"><i class="fa fa-check"></i><b>9.4</b> 可计算定义</a></li>
-<li class="chapter" data-level="9.5" data-path="pattern-scoring.html"><a href="pattern-scoring.html#%E7%A0%94%E7%A9%B6%E8%AE%BE%E8%AE%A1-8"><i class="fa fa-check"></i><b>9.5</b> 研究设计</a></li>
-<li class="chapter" data-level="9.6" data-path="pattern-scoring.html"><a href="pattern-scoring.html#r%E5%AE%9E%E7%8E%B0-8"><i class="fa fa-check"></i><b>9.6</b> R实现</a></li>
-<li class="chapter" data-level="9.7" data-path="pattern-scoring.html"><a href="pattern-scoring.html#python%E5%AE%9E%E7%8E%B0-8"><i class="fa fa-check"></i><b>9.7</b> Python实现</a></li>
-<li class="chapter" data-level="9.8" data-path="pattern-scoring.html"><a href="pattern-scoring.html#%E5%9B%BE%E5%BD%A2%E8%AF%8A%E6%96%AD-8"><i class="fa fa-check"></i><b>9.8</b> 图形诊断</a></li>
-<li class="chapter" data-level="9.9" data-path="pattern-scoring.html"><a href="pattern-scoring.html#%E8%AF%81%E6%8D%AE%E4%B8%8E%E7%A8%B3%E5%81%A5%E6%80%A7-8"><i class="fa fa-check"></i><b>9.9</b> 证据与稳健性</a></li>
-<li class="chapter" data-level="9.10" data-path="pattern-scoring.html"><a href="pattern-scoring.html#ai%E5%8D%8F%E4%BD%9C%E5%AE%9E%E9%AA%8C%E5%AE%A4-8"><i class="fa fa-check"></i><b>9.10</b> AI协作实验室</a></li>
-<li class="chapter" data-level="9.11" data-path="pattern-scoring.html"><a href="pattern-scoring.html#%E5%A4%B1%E6%95%88%E6%9D%A1%E4%BB%B6%E4%B8%8E%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA-8"><i class="fa fa-check"></i><b>9.11</b> 失效条件与常见误区</a></li>
-<li class="chapter" data-level="9.12" data-path="pattern-scoring.html"><a href="pattern-scoring.html#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0-8"><i class="fa fa-check"></i><b>9.12</b> 本章小结与练习</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="trend.html"><a href="trend.html"><i class="fa fa-check"></i><b>10</b> 趋势、支撑阻力与极性转换</a>
-<ul>
-<li class="chapter" data-level="10.1" data-path="trend.html"><a href="trend.html#%E9%97%AE%E9%A2%98%E7%8E%B0%E5%9C%BA-9"><i class="fa fa-check"></i><b>10.1</b> 问题现场</a></li>
-<li class="chapter" data-level="10.2" data-path="trend.html"><a href="trend.html#%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87-9"><i class="fa fa-check"></i><b>10.2</b> 学习目标</a></li>
-<li class="chapter" data-level="10.3" data-path="trend.html"><a href="trend.html#%E7%BB%8F%E5%85%B8%E5%BD%A2%E6%80%81%E4%B8%8E%E5%B8%82%E5%9C%BA%E6%9C%BA%E5%88%B6-9"><i class="fa fa-check"></i><b>10.3</b> 经典形态与市场机制</a></li>
-<li class="chapter" data-level="10.4" data-path="trend.html"><a href="trend.html#%E5%8F%AF%E8%AE%A1%E7%AE%97%E5%AE%9A%E4%B9%89-9"><i class="fa fa-check"></i><b>10.4</b> 可计算定义</a></li>
-<li class="chapter" data-level="10.5" data-path="trend.html"><a href="trend.html#%E7%A0%94%E7%A9%B6%E8%AE%BE%E8%AE%A1-9"><i class="fa fa-check"></i><b>10.5</b> 研究设计</a></li>
-<li class="chapter" data-level="10.6" data-path="trend.html"><a href="trend.html#r%E5%AE%9E%E7%8E%B0-9"><i class="fa fa-check"></i><b>10.6</b> R实现</a></li>
-<li class="chapter" data-level="10.7" data-path="trend.html"><a href="trend.html#python%E5%AE%9E%E7%8E%B0-9"><i class="fa fa-check"></i><b>10.7</b> Python实现</a></li>
-<li class="chapter" data-level="10.8" data-path="trend.html"><a href="trend.html#%E5%9B%BE%E5%BD%A2%E8%AF%8A%E6%96%AD-9"><i class="fa fa-check"></i><b>10.8</b> 图形诊断</a></li>
-<li class="chapter" data-level="10.9" data-path="trend.html"><a href="trend.html#%E8%AF%81%E6%8D%AE%E4%B8%8E%E7%A8%B3%E5%81%A5%E6%80%A7-9"><i class="fa fa-check"></i><b>10.9</b> 证据与稳健性</a></li>
-<li class="chapter" data-level="10.10" data-path="trend.html"><a href="trend.html#ai%E5%8D%8F%E4%BD%9C%E5%AE%9E%E9%AA%8C%E5%AE%A4-9"><i class="fa fa-check"></i><b>10.10</b> AI协作实验室</a></li>
-<li class="chapter" data-level="10.11" data-path="trend.html"><a href="trend.html#%E5%A4%B1%E6%95%88%E6%9D%A1%E4%BB%B6%E4%B8%8E%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA-9"><i class="fa fa-check"></i><b>10.11</b> 失效条件与常见误区</a></li>
-<li class="chapter" data-level="10.12" data-path="trend.html"><a href="trend.html#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0-9"><i class="fa fa-check"></i><b>10.12</b> 本章小结与练习</a></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="percentage.html"><a href="percentage.html"><i class="fa fa-check"></i><b>11</b> 蜡烛图与百分比回撤水平</a>
-<ul>
-<li class="chapter" data-level="11.1" data-path="percentage.html"><a href="percentage.html#%E9%97%AE%E9%A2%98%E7%8E%B0%E5%9C%BA-10"><i class="fa fa-check"></i><b>11.1</b> 问题现场</a></li>
-<li class="chapter" data-level="11.2" data-path="percentage.html"><a href="percentage.html#%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87-10"><i class="fa fa-check"></i><b>11.2</b> 学习目标</a></li>
-<li class="chapter" data-level="11.3" data-path="percentage.html"><a href="percentage.html#%E7%BB%8F%E5%85%B8%E5%BD%A2%E6%80%81%E4%B8%8E%E5%B8%82%E5%9C%BA%E6%9C%BA%E5%88%B6-10"><i class="fa fa-check"></i><b>11.3</b> 经典形态与市场机制</a></li>
-<li class="chapter" data-level="11.4" data-path="percentage.html"><a href="percentage.html#%E5%8F%AF%E8%AE%A1%E7%AE%97%E5%AE%9A%E4%B9%89-10"><i class="fa fa-check"></i><b>11.4</b> 可计算定义</a></li>
-<li class="chapter" data-level="11.5" data-path="percentage.html"><a href="percentage.html#%E7%A0%94%E7%A9%B6%E8%AE%BE%E8%AE%A1-10"><i class="fa fa-check"></i><b>11.5</b> 研究设计</a></li>
-<li class="chapter" data-level="11.6" data-path="percentage.html"><a href="percentage.html#r%E5%AE%9E%E7%8E%B0-10"><i class="fa fa-check"></i><b>11.6</b> R实现</a></li>
-<li class="chapter" data-level="11.7" data-path="percentage.html"><a href="percentage.html#python%E5%AE%9E%E7%8E%B0-10"><i class="fa fa-check"></i><b>11.7</b> Python实现</a></li>
-<li class="chapter" data-level="11.8" data-path="percentage.html"><a href="percentage.html#%E5%9B%BE%E5%BD%A2%E8%AF%8A%E6%96%AD-10"><i class="fa fa-check"></i><b>11.8</b> 图形诊断</a></li>
-<li class="chapter" data-level="11.9" data-path="percentage.html"><a href="percentage.html#%E8%AF%81%E6%8D%AE%E4%B8%8E%E7%A8%B3%E5%81%A5%E6%80%A7-10"><i class="fa fa-check"></i><b>11.9</b> 证据与稳健性</a></li>
-<li class="chapter" data-level="11.10" data-path="percentage.html"><a href="percentage.html#ai%E5%8D%8F%E4%BD%9C%E5%AE%9E%E9%AA%8C%E5%AE%A4-10"><i class="fa fa-check"></i><b>11.10</b> AI协作实验室</a></li>
-<li class="chapter" data-level="11.11" data-path="percentage.html"><a href="percentage.html#%E5%A4%B1%E6%95%88%E6%9D%A1%E4%BB%B6%E4%B8%8E%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA-10"><i class="fa fa-check"></i><b>11.11</b> 失效条件与常见误区</a></li>
-<li class="chapter" data-level="11.12" data-path="percentage.html"><a href="percentage.html#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0-10"><i class="fa fa-check"></i><b>11.12</b> 本章小结与练习</a></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="ma.html"><a href="ma.html"><i class="fa fa-check"></i><b>12</b> 蜡烛图与移动平均线</a>
-<ul>
-<li class="chapter" data-level="12.1" data-path="ma.html"><a href="ma.html#%E9%97%AE%E9%A2%98%E7%8E%B0%E5%9C%BA-11"><i class="fa fa-check"></i><b>12.1</b> 问题现场</a></li>
-<li class="chapter" data-level="12.2" data-path="ma.html"><a href="ma.html#%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87-11"><i class="fa fa-check"></i><b>12.2</b> 学习目标</a></li>
-<li class="chapter" data-level="12.3" data-path="ma.html"><a href="ma.html#%E7%BB%8F%E5%85%B8%E5%BD%A2%E6%80%81%E4%B8%8E%E5%B8%82%E5%9C%BA%E6%9C%BA%E5%88%B6-11"><i class="fa fa-check"></i><b>12.3</b> 经典形态与市场机制</a></li>
-<li class="chapter" data-level="12.4" data-path="ma.html"><a href="ma.html#%E5%8F%AF%E8%AE%A1%E7%AE%97%E5%AE%9A%E4%B9%89-11"><i class="fa fa-check"></i><b>12.4</b> 可计算定义</a></li>
-<li class="chapter" data-level="12.5" data-path="ma.html"><a href="ma.html#%E7%A0%94%E7%A9%B6%E8%AE%BE%E8%AE%A1-11"><i class="fa fa-check"></i><b>12.5</b> 研究设计</a></li>
-<li class="chapter" data-level="12.6" data-path="ma.html"><a href="ma.html#r%E5%AE%9E%E7%8E%B0-11"><i class="fa fa-check"></i><b>12.6</b> R实现</a></li>
-<li class="chapter" data-level="12.7" data-path="ma.html"><a href="ma.html#python%E5%AE%9E%E7%8E%B0-11"><i class="fa fa-check"></i><b>12.7</b> Python实现</a></li>
-<li class="chapter" data-level="12.8" data-path="ma.html"><a href="ma.html#%E5%9B%BE%E5%BD%A2%E8%AF%8A%E6%96%AD-11"><i class="fa fa-check"></i><b>12.8</b> 图形诊断</a></li>
-<li class="chapter" data-level="12.9" data-path="ma.html"><a href="ma.html#%E8%AF%81%E6%8D%AE%E4%B8%8E%E7%A8%B3%E5%81%A5%E6%80%A7-11"><i class="fa fa-check"></i><b>12.9</b> 证据与稳健性</a></li>
-<li class="chapter" data-level="12.10" data-path="ma.html"><a href="ma.html#ai%E5%8D%8F%E4%BD%9C%E5%AE%9E%E9%AA%8C%E5%AE%A4-11"><i class="fa fa-check"></i><b>12.10</b> AI协作实验室</a></li>
-<li class="chapter" data-level="12.11" data-path="ma.html"><a href="ma.html#%E5%A4%B1%E6%95%88%E6%9D%A1%E4%BB%B6%E4%B8%8E%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA-11"><i class="fa fa-check"></i><b>12.11</b> 失效条件与常见误区</a></li>
-<li class="chapter" data-level="12.12" data-path="ma.html"><a href="ma.html#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0-11"><i class="fa fa-check"></i><b>12.12</b> 本章小结与练习</a></li>
-</ul></li>
-<li class="chapter" data-level="13" data-path="rsi.html"><a href="rsi.html"><i class="fa fa-check"></i><b>13</b> 蜡烛图与摆动指标</a>
-<ul>
-<li class="chapter" data-level="13.1" data-path="rsi.html"><a href="rsi.html#%E9%97%AE%E9%A2%98%E7%8E%B0%E5%9C%BA-12"><i class="fa fa-check"></i><b>13.1</b> 问题现场</a></li>
-<li class="chapter" data-level="13.2" data-path="rsi.html"><a href="rsi.html#%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87-12"><i class="fa fa-check"></i><b>13.2</b> 学习目标</a></li>
-<li class="chapter" data-level="13.3" data-path="rsi.html"><a href="rsi.html#%E7%BB%8F%E5%85%B8%E5%BD%A2%E6%80%81%E4%B8%8E%E5%B8%82%E5%9C%BA%E6%9C%BA%E5%88%B6-12"><i class="fa fa-check"></i><b>13.3</b> 经典形态与市场机制</a></li>
-<li class="chapter" data-level="13.4" data-path="rsi.html"><a href="rsi.html#%E5%8F%AF%E8%AE%A1%E7%AE%97%E5%AE%9A%E4%B9%89-12"><i class="fa fa-check"></i><b>13.4</b> 可计算定义</a></li>
-<li class="chapter" data-level="13.5" data-path="rsi.html"><a href="rsi.html#%E7%A0%94%E7%A9%B6%E8%AE%BE%E8%AE%A1-12"><i class="fa fa-check"></i><b>13.5</b> 研究设计</a></li>
-<li class="chapter" data-level="13.6" data-path="rsi.html"><a href="rsi.html#r%E5%AE%9E%E7%8E%B0-12"><i class="fa fa-check"></i><b>13.6</b> R实现</a></li>
-<li class="chapter" data-level="13.7" data-path="rsi.html"><a href="rsi.html#python%E5%AE%9E%E7%8E%B0-12"><i class="fa fa-check"></i><b>13.7</b> Python实现</a></li>
-<li class="chapter" data-level="13.8" data-path="rsi.html"><a href="rsi.html#%E5%9B%BE%E5%BD%A2%E8%AF%8A%E6%96%AD-12"><i class="fa fa-check"></i><b>13.8</b> 图形诊断</a></li>
-<li class="chapter" data-level="13.9" data-path="rsi.html"><a href="rsi.html#%E8%AF%81%E6%8D%AE%E4%B8%8E%E7%A8%B3%E5%81%A5%E6%80%A7-12"><i class="fa fa-check"></i><b>13.9</b> 证据与稳健性</a></li>
-<li class="chapter" data-level="13.10" data-path="rsi.html"><a href="rsi.html#ai%E5%8D%8F%E4%BD%9C%E5%AE%9E%E9%AA%8C%E5%AE%A4-12"><i class="fa fa-check"></i><b>13.10</b> AI协作实验室</a></li>
-<li class="chapter" data-level="13.11" data-path="rsi.html"><a href="rsi.html#%E5%A4%B1%E6%95%88%E6%9D%A1%E4%BB%B6%E4%B8%8E%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA-12"><i class="fa fa-check"></i><b>13.11</b> 失效条件与常见误区</a></li>
-<li class="chapter" data-level="13.12" data-path="rsi.html"><a href="rsi.html#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0-12"><i class="fa fa-check"></i><b>13.12</b> 本章小结与练习</a></li>
-</ul></li>
-<li class="chapter" data-level="14" data-path="obv.html"><a href="obv.html"><i class="fa fa-check"></i><b>14</b> 蜡烛图与成交量：OBV、CMF与VWAP</a>
-<ul>
-<li class="chapter" data-level="14.1" data-path="obv.html"><a href="obv.html#%E9%97%AE%E9%A2%98%E7%8E%B0%E5%9C%BA-13"><i class="fa fa-check"></i><b>14.1</b> 问题现场</a></li>
-<li class="chapter" data-level="14.2" data-path="obv.html"><a href="obv.html#%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87-13"><i class="fa fa-check"></i><b>14.2</b> 学习目标</a></li>
-<li class="chapter" data-level="14.3" data-path="obv.html"><a href="obv.html#%E7%BB%8F%E5%85%B8%E5%BD%A2%E6%80%81%E4%B8%8E%E5%B8%82%E5%9C%BA%E6%9C%BA%E5%88%B6-13"><i class="fa fa-check"></i><b>14.3</b> 经典形态与市场机制</a></li>
-<li class="chapter" data-level="14.4" data-path="obv.html"><a href="obv.html#%E5%8F%AF%E8%AE%A1%E7%AE%97%E5%AE%9A%E4%B9%89-13"><i class="fa fa-check"></i><b>14.4</b> 可计算定义</a></li>
-<li class="chapter" data-level="14.5" data-path="obv.html"><a href="obv.html#%E7%A0%94%E7%A9%B6%E8%AE%BE%E8%AE%A1-13"><i class="fa fa-check"></i><b>14.5</b> 研究设计</a></li>
-<li class="chapter" data-level="14.6" data-path="obv.html"><a href="obv.html#r%E5%AE%9E%E7%8E%B0-13"><i class="fa fa-check"></i><b>14.6</b> R实现</a></li>
-<li class="chapter" data-level="14.7" data-path="obv.html"><a href="obv.html#python%E5%AE%9E%E7%8E%B0-13"><i class="fa fa-check"></i><b>14.7</b> Python实现</a></li>
-<li class="chapter" data-level="14.8" data-path="obv.html"><a href="obv.html#%E5%9B%BE%E5%BD%A2%E8%AF%8A%E6%96%AD-13"><i class="fa fa-check"></i><b>14.8</b> 图形诊断</a></li>
-<li class="chapter" data-level="14.9" data-path="obv.html"><a href="obv.html#%E8%AF%81%E6%8D%AE%E4%B8%8E%E7%A8%B3%E5%81%A5%E6%80%A7-13"><i class="fa fa-check"></i><b>14.9</b> 证据与稳健性</a></li>
-<li class="chapter" data-level="14.10" data-path="obv.html"><a href="obv.html#ai%E5%8D%8F%E4%BD%9C%E5%AE%9E%E9%AA%8C%E5%AE%A4-13"><i class="fa fa-check"></i><b>14.10</b> AI协作实验室</a></li>
-<li class="chapter" data-level="14.11" data-path="obv.html"><a href="obv.html#%E5%A4%B1%E6%95%88%E6%9D%A1%E4%BB%B6%E4%B8%8E%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA-13"><i class="fa fa-check"></i><b>14.11</b> 失效条件与常见误区</a></li>
-<li class="chapter" data-level="14.12" data-path="obv.html"><a href="obv.html#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0-13"><i class="fa fa-check"></i><b>14.12</b> 本章小结与练习</a></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="waves.html"><a href="waves.html"><i class="fa fa-check"></i><b>15</b> 蜡烛图与波段结构</a>
-<ul>
-<li class="chapter" data-level="15.1" data-path="waves.html"><a href="waves.html#%E9%97%AE%E9%A2%98%E7%8E%B0%E5%9C%BA-14"><i class="fa fa-check"></i><b>15.1</b> 问题现场</a></li>
-<li class="chapter" data-level="15.2" data-path="waves.html"><a href="waves.html#%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87-14"><i class="fa fa-check"></i><b>15.2</b> 学习目标</a></li>
-<li class="chapter" data-level="15.3" data-path="waves.html"><a href="waves.html#%E7%BB%8F%E5%85%B8%E5%BD%A2%E6%80%81%E4%B8%8E%E5%B8%82%E5%9C%BA%E6%9C%BA%E5%88%B6-14"><i class="fa fa-check"></i><b>15.3</b> 经典形态与市场机制</a></li>
-<li class="chapter" data-level="15.4" data-path="waves.html"><a href="waves.html#%E5%8F%AF%E8%AE%A1%E7%AE%97%E5%AE%9A%E4%B9%89-14"><i class="fa fa-check"></i><b>15.4</b> 可计算定义</a></li>
-<li class="chapter" data-level="15.5" data-path="waves.html"><a href="waves.html#%E7%A0%94%E7%A9%B6%E8%AE%BE%E8%AE%A1-14"><i class="fa fa-check"></i><b>15.5</b> 研究设计</a></li>
-<li class="chapter" data-level="15.6" data-path="waves.html"><a href="waves.html#r%E5%AE%9E%E7%8E%B0-14"><i class="fa fa-check"></i><b>15.6</b> R实现</a></li>
-<li class="chapter" data-level="15.7" data-path="waves.html"><a href="waves.html#python%E5%AE%9E%E7%8E%B0-14"><i class="fa fa-check"></i><b>15.7</b> Python实现</a></li>
-<li class="chapter" data-level="15.8" data-path="waves.html"><a href="waves.html#%E5%9B%BE%E5%BD%A2%E8%AF%8A%E6%96%AD-14"><i class="fa fa-check"></i><b>15.8</b> 图形诊断</a></li>
-<li class="chapter" data-level="15.9" data-path="waves.html"><a href="waves.html#%E8%AF%81%E6%8D%AE%E4%B8%8E%E7%A8%B3%E5%81%A5%E6%80%A7-14"><i class="fa fa-check"></i><b>15.9</b> 证据与稳健性</a></li>
-<li class="chapter" data-level="15.10" data-path="waves.html"><a href="waves.html#ai%E5%8D%8F%E4%BD%9C%E5%AE%9E%E9%AA%8C%E5%AE%A4-14"><i class="fa fa-check"></i><b>15.10</b> AI协作实验室</a></li>
-<li class="chapter" data-level="15.11" data-path="waves.html"><a href="waves.html#%E5%A4%B1%E6%95%88%E6%9D%A1%E4%BB%B6%E4%B8%8E%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA-14"><i class="fa fa-check"></i><b>15.11</b> 失效条件与常见误区</a></li>
-<li class="chapter" data-level="15.12" data-path="waves.html"><a href="waves.html#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0-14"><i class="fa fa-check"></i><b>15.12</b> 本章小结与练习</a></li>
-</ul></li>
-<li class="chapter" data-level="16" data-path="profile.html"><a href="profile.html"><i class="fa fa-check"></i><b>16</b> 蜡烛图与成交量价格剖面</a>
-<ul>
-<li class="chapter" data-level="16.1" data-path="profile.html"><a href="profile.html#%E9%97%AE%E9%A2%98%E7%8E%B0%E5%9C%BA-15"><i class="fa fa-check"></i><b>16.1</b> 问题现场</a></li>
-<li class="chapter" data-level="16.2" data-path="profile.html"><a href="profile.html#%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87-15"><i class="fa fa-check"></i><b>16.2</b> 学习目标</a></li>
-<li class="chapter" data-level="16.3" data-path="profile.html"><a href="profile.html#%E7%BB%8F%E5%85%B8%E5%BD%A2%E6%80%81%E4%B8%8E%E5%B8%82%E5%9C%BA%E6%9C%BA%E5%88%B6-15"><i class="fa fa-check"></i><b>16.3</b> 经典形态与市场机制</a></li>
-<li class="chapter" data-level="16.4" data-path="profile.html"><a href="profile.html#%E5%8F%AF%E8%AE%A1%E7%AE%97%E5%AE%9A%E4%B9%89-15"><i class="fa fa-check"></i><b>16.4</b> 可计算定义</a></li>
-<li class="chapter" data-level="16.5" data-path="profile.html"><a href="profile.html#%E7%A0%94%E7%A9%B6%E8%AE%BE%E8%AE%A1-15"><i class="fa fa-check"></i><b>16.5</b> 研究设计</a></li>
-<li class="chapter" data-level="16.6" data-path="profile.html"><a href="profile.html#r%E5%AE%9E%E7%8E%B0-15"><i class="fa fa-check"></i><b>16.6</b> R实现</a></li>
-<li class="chapter" data-level="16.7" data-path="profile.html"><a href="profile.html#python%E5%AE%9E%E7%8E%B0-15"><i class="fa fa-check"></i><b>16.7</b> Python实现</a></li>
-<li class="chapter" data-level="16.8" data-path="profile.html"><a href="profile.html#%E5%9B%BE%E5%BD%A2%E8%AF%8A%E6%96%AD-15"><i class="fa fa-check"></i><b>16.8</b> 图形诊断</a></li>
-<li class="chapter" data-level="16.9" data-path="profile.html"><a href="profile.html#%E8%AF%81%E6%8D%AE%E4%B8%8E%E7%A8%B3%E5%81%A5%E6%80%A7-15"><i class="fa fa-check"></i><b>16.9</b> 证据与稳健性</a></li>
-<li class="chapter" data-level="16.10" data-path="profile.html"><a href="profile.html#ai%E5%8D%8F%E4%BD%9C%E5%AE%9E%E9%AA%8C%E5%AE%A4-15"><i class="fa fa-check"></i><b>16.10</b> AI协作实验室</a></li>
-<li class="chapter" data-level="16.11" data-path="profile.html"><a href="profile.html#%E5%A4%B1%E6%95%88%E6%9D%A1%E4%BB%B6%E4%B8%8E%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA-15"><i class="fa fa-check"></i><b>16.11</b> 失效条件与常见误区</a></li>
-<li class="chapter" data-level="16.12" data-path="profile.html"><a href="profile.html#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0-15"><i class="fa fa-check"></i><b>16.12</b> 本章小结与练习</a></li>
-</ul></li>
-<li class="part"><span><b>IV 决策：从候选信号到风险暴露</b></span></li>
-<li class="chapter" data-level="17" data-path="option.html"><a href="option.html"><i class="fa fa-check"></i><b>17</b> 蜡烛图与期权决策</a>
-<ul>
-<li class="chapter" data-level="17.1" data-path="option.html"><a href="option.html#%E9%97%AE%E9%A2%98%E7%8E%B0%E5%9C%BA-16"><i class="fa fa-check"></i><b>17.1</b> 问题现场</a></li>
-<li class="chapter" data-level="17.2" data-path="option.html"><a href="option.html#%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87-16"><i class="fa fa-check"></i><b>17.2</b> 学习目标</a></li>
-<li class="chapter" data-level="17.3" data-path="option.html"><a href="option.html#%E7%BB%8F%E5%85%B8%E5%BD%A2%E6%80%81%E4%B8%8E%E5%B8%82%E5%9C%BA%E6%9C%BA%E5%88%B6-16"><i class="fa fa-check"></i><b>17.3</b> 经典形态与市场机制</a></li>
-<li class="chapter" data-level="17.4" data-path="option.html"><a href="option.html#%E5%8F%AF%E8%AE%A1%E7%AE%97%E5%AE%9A%E4%B9%89-16"><i class="fa fa-check"></i><b>17.4</b> 可计算定义</a></li>
-<li class="chapter" data-level="17.5" data-path="option.html"><a href="option.html#%E7%A0%94%E7%A9%B6%E8%AE%BE%E8%AE%A1-16"><i class="fa fa-check"></i><b>17.5</b> 研究设计</a></li>
-<li class="chapter" data-level="17.6" data-path="option.html"><a href="option.html#r%E5%AE%9E%E7%8E%B0-16"><i class="fa fa-check"></i><b>17.6</b> R实现</a></li>
-<li class="chapter" data-level="17.7" data-path="option.html"><a href="option.html#python%E5%AE%9E%E7%8E%B0-16"><i class="fa fa-check"></i><b>17.7</b> Python实现</a></li>
-<li class="chapter" data-level="17.8" data-path="option.html"><a href="option.html#%E5%9B%BE%E5%BD%A2%E8%AF%8A%E6%96%AD-16"><i class="fa fa-check"></i><b>17.8</b> 图形诊断</a></li>
-<li class="chapter" data-level="17.9" data-path="option.html"><a href="option.html#%E8%AF%81%E6%8D%AE%E4%B8%8E%E7%A8%B3%E5%81%A5%E6%80%A7-16"><i class="fa fa-check"></i><b>17.9</b> 证据与稳健性</a></li>
-<li class="chapter" data-level="17.10" data-path="option.html"><a href="option.html#ai%E5%8D%8F%E4%BD%9C%E5%AE%9E%E9%AA%8C%E5%AE%A4-16"><i class="fa fa-check"></i><b>17.10</b> AI协作实验室</a></li>
-<li class="chapter" data-level="17.11" data-path="option.html"><a href="option.html#%E5%A4%B1%E6%95%88%E6%9D%A1%E4%BB%B6%E4%B8%8E%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA-16"><i class="fa fa-check"></i><b>17.11</b> 失效条件与常见误区</a></li>
-<li class="chapter" data-level="17.12" data-path="option.html"><a href="option.html#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0-16"><i class="fa fa-check"></i><b>17.12</b> 本章小结与练习</a></li>
-</ul></li>
-<li class="chapter" data-level="18" data-path="hedging.html"><a href="hedging.html"><i class="fa fa-check"></i><b>18</b> 蜡烛图与动态套期保值</a>
-<ul>
-<li class="chapter" data-level="18.1" data-path="hedging.html"><a href="hedging.html#%E9%97%AE%E9%A2%98%E7%8E%B0%E5%9C%BA-17"><i class="fa fa-check"></i><b>18.1</b> 问题现场</a></li>
-<li class="chapter" data-level="18.2" data-path="hedging.html"><a href="hedging.html#%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87-17"><i class="fa fa-check"></i><b>18.2</b> 学习目标</a></li>
-<li class="chapter" data-level="18.3" data-path="hedging.html"><a href="hedging.html#%E7%BB%8F%E5%85%B8%E5%BD%A2%E6%80%81%E4%B8%8E%E5%B8%82%E5%9C%BA%E6%9C%BA%E5%88%B6-17"><i class="fa fa-check"></i><b>18.3</b> 经典形态与市场机制</a></li>
-<li class="chapter" data-level="18.4" data-path="hedging.html"><a href="hedging.html#%E5%8F%AF%E8%AE%A1%E7%AE%97%E5%AE%9A%E4%B9%89-17"><i class="fa fa-check"></i><b>18.4</b> 可计算定义</a></li>
-<li class="chapter" data-level="18.5" data-path="hedging.html"><a href="hedging.html#%E7%A0%94%E7%A9%B6%E8%AE%BE%E8%AE%A1-17"><i class="fa fa-check"></i><b>18.5</b> 研究设计</a></li>
-<li class="chapter" data-level="18.6" data-path="hedging.html"><a href="hedging.html#r%E5%AE%9E%E7%8E%B0-17"><i class="fa fa-check"></i><b>18.6</b> R实现</a></li>
-<li class="chapter" data-level="18.7" data-path="hedging.html"><a href="hedging.html#python%E5%AE%9E%E7%8E%B0-17"><i class="fa fa-check"></i><b>18.7</b> Python实现</a></li>
-<li class="chapter" data-level="18.8" data-path="hedging.html"><a href="hedging.html#%E5%9B%BE%E5%BD%A2%E8%AF%8A%E6%96%AD-17"><i class="fa fa-check"></i><b>18.8</b> 图形诊断</a></li>
-<li class="chapter" data-level="18.9" data-path="hedging.html"><a href="hedging.html#%E8%AF%81%E6%8D%AE%E4%B8%8E%E7%A8%B3%E5%81%A5%E6%80%A7-17"><i class="fa fa-check"></i><b>18.9</b> 证据与稳健性</a></li>
-<li class="chapter" data-level="18.10" data-path="hedging.html"><a href="hedging.html#ai%E5%8D%8F%E4%BD%9C%E5%AE%9E%E9%AA%8C%E5%AE%A4-17"><i class="fa fa-check"></i><b>18.10</b> AI协作实验室</a></li>
-<li class="chapter" data-level="18.11" data-path="hedging.html"><a href="hedging.html#%E5%A4%B1%E6%95%88%E6%9D%A1%E4%BB%B6%E4%B8%8E%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA-17"><i class="fa fa-check"></i><b>18.11</b> 失效条件与常见误区</a></li>
-<li class="chapter" data-level="18.12" data-path="hedging.html"><a href="hedging.html#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0-17"><i class="fa fa-check"></i><b>18.12</b> 本章小结与练习</a></li>
-</ul></li>
-<li class="chapter" data-level="19" data-path="comprehensive.html"><a href="comprehensive.html"><i class="fa fa-check"></i><b>19</b> 从形态到可运行研究：综合案例</a>
-<ul>
-<li class="chapter" data-level="19.1" data-path="comprehensive.html"><a href="comprehensive.html#%E9%97%AE%E9%A2%98%E7%8E%B0%E5%9C%BA-18"><i class="fa fa-check"></i><b>19.1</b> 问题现场</a></li>
-<li class="chapter" data-level="19.2" data-path="comprehensive.html"><a href="comprehensive.html#%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87-18"><i class="fa fa-check"></i><b>19.2</b> 学习目标</a></li>
-<li class="chapter" data-level="19.3" data-path="comprehensive.html"><a href="comprehensive.html#%E7%BB%8F%E5%85%B8%E5%BD%A2%E6%80%81%E4%B8%8E%E5%B8%82%E5%9C%BA%E6%9C%BA%E5%88%B6-18"><i class="fa fa-check"></i><b>19.3</b> 经典形态与市场机制</a></li>
-<li class="chapter" data-level="19.4" data-path="comprehensive.html"><a href="comprehensive.html#%E5%8F%AF%E8%AE%A1%E7%AE%97%E5%AE%9A%E4%B9%89-18"><i class="fa fa-check"></i><b>19.4</b> 可计算定义</a></li>
-<li class="chapter" data-level="19.5" data-path="comprehensive.html"><a href="comprehensive.html#%E7%A0%94%E7%A9%B6%E8%AE%BE%E8%AE%A1-18"><i class="fa fa-check"></i><b>19.5</b> 研究设计</a></li>
-<li class="chapter" data-level="19.6" data-path="comprehensive.html"><a href="comprehensive.html#r%E5%AE%9E%E7%8E%B0-18"><i class="fa fa-check"></i><b>19.6</b> R实现</a></li>
-<li class="chapter" data-level="19.7" data-path="comprehensive.html"><a href="comprehensive.html#python%E5%AE%9E%E7%8E%B0-18"><i class="fa fa-check"></i><b>19.7</b> Python实现</a></li>
-<li class="chapter" data-level="19.8" data-path="comprehensive.html"><a href="comprehensive.html#%E5%9B%BE%E5%BD%A2%E8%AF%8A%E6%96%AD-18"><i class="fa fa-check"></i><b>19.8</b> 图形诊断</a></li>
-<li class="chapter" data-level="19.9" data-path="comprehensive.html"><a href="comprehensive.html#%E8%AF%81%E6%8D%AE%E4%B8%8E%E7%A8%B3%E5%81%A5%E6%80%A7-18"><i class="fa fa-check"></i><b>19.9</b> 证据与稳健性</a></li>
-<li class="chapter" data-level="19.10" data-path="comprehensive.html"><a href="comprehensive.html#ai%E5%8D%8F%E4%BD%9C%E5%AE%9E%E9%AA%8C%E5%AE%A4-18"><i class="fa fa-check"></i><b>19.10</b> AI协作实验室</a></li>
-<li class="chapter" data-level="19.11" data-path="comprehensive.html"><a href="comprehensive.html#%E5%A4%B1%E6%95%88%E6%9D%A1%E4%BB%B6%E4%B8%8E%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA-18"><i class="fa fa-check"></i><b>19.11</b> 失效条件与常见误区</a></li>
-<li class="chapter" data-level="19.12" data-path="comprehensive.html"><a href="comprehensive.html#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93%E4%B8%8E%E7%BB%83%E4%B9%A0-18"><i class="fa fa-check"></i><b>19.12</b> 本章小结与练习</a></li>
-</ul></li>
-<li class="appendix"><span><b>附录</b></span></li>
-<li class="chapter" data-level="A" data-path="sound.html"><a href="sound.html"><i class="fa fa-check"></i><b>A</b> 复现环境、API字典与研究审计</a>
-<ul>
-<li class="chapter" data-level="A.1" data-path="sound.html"><a href="sound.html#%E6%9E%84%E5%BB%BA%E7%8E%AF%E5%A2%83"><i class="fa fa-check"></i><b>A.1</b> 构建环境</a></li>
-<li class="chapter" data-level="A.2" data-path="sound.html"><a href="sound.html#%E5%86%BB%E7%BB%93%E6%95%B0%E6%8D%AE%E4%B8%8E%E5%93%88%E5%B8%8C"><i class="fa fa-check"></i><b>A.2</b> 冻结数据与哈希</a></li>
-<li class="chapter" data-level="A.3" data-path="sound.html"><a href="sound.html#ecandlesticks%E5%BD%A2%E6%80%81%E5%AD%97%E5%85%B8"><i class="fa fa-check"></i><b>A.3</b> eCandleSticks形态字典</a></li>
-<li class="chapter" data-level="A.4" data-path="sound.html"><a href="sound.html#ettr%E4%B8%8Eefincharts%E4%B8%BB%E6%8E%A5%E5%8F%A3"><i class="fa fa-check"></i><b>A.4</b> eTTR与eFinCharts主接口</a></li>
-<li class="chapter" data-level="A.5" data-path="sound.html"><a href="sound.html#%E5%B8%82%E5%9C%BA%E7%8A%B6%E6%80%81%E4%B8%8Ehmm%E6%89%A9%E5%B1%95"><i class="fa fa-check"></i><b>A.5</b> 市场状态与HMM扩展</a></li>
-<li class="chapter" data-level="A.6" data-path="sound.html"><a href="sound.html#%E5%8F%91%E5%B8%83%E5%89%8D%E8%87%AA%E5%8A%A8%E6%A3%80%E6%9F%A5"><i class="fa fa-check"></i><b>A.6</b> 发布前自动检查</a></li>
-<li class="chapter" data-level="A.7" data-path="sound.html"><a href="sound.html#%E7%A0%94%E7%A9%B6%E8%AE%B0%E5%BD%95%E6%A8%A1%E6%9D%BF"><i class="fa fa-check"></i><b>A.7</b> 研究记录模板</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
-<li class="divider"></li>
-<li><a href="https://bookdown.org" target="blank">本书由 bookdown 强力驱动</a></li>
-
-</ul>
-
-      </nav>
-    </div>
-
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">AI时代的蜡烛图分析</a>
-          </h1>
-        </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered hasAnchor">
-<h1>参考文献<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-
-<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
-<div class="csl-entry">
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="用可计算、可复现、可证伪的方法研究蜡烛图形态的开源书稿">
+<title>参考文献 · AI时代的蜡烛图分析</title>
+<link rel="stylesheet" href="assets/style.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\(','\)']],displayMath:[['$$','$$'],['\[','\]']]}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head><body>
+<nav id="sidebar"><div class="brand"><a href="index.html">AI时代的蜡烛图分析</a><small>从经典形态到可验证证据：R与Python双语实践</small>
+<input class="search-box" id="q" placeholder="搜索章节…" autocomplete="off">
+<div class="search-results" id="results"></div></div>
+<a class="nav" href="index.html">前言</a>
+<div class="group">基础：从图形语言到可检验证据</div>
+<a class="nav" href="intro.html">第1章 蜡烛图：从图形语言到可检验证据</a>
+<a class="nav" href="candle.html">第2章 R与Python绘制可审计的蜡烛图</a>
+<div class="group">形态：按K线数量组织的结构语言</div>
+<a class="nav" href="single-candle.html">第3章 单根K线：压力、拒绝与失衡</a>
+<a class="nav" href="two-candle.html">第4章 双根K线：吞没、孕线与反击</a>
+<a class="nav" href="multi-candle.html">第5章 三根及多根K线：序列与确认</a>
+<a class="nav" href="gap-continuation.html">第6章 跳空与持续形态</a>
+<a class="nav" href="doji-failure.html">第7章 十字线、犹豫与失败信号</a>
+<a class="nav" href="pattern-dictionary.html">第8章 形态字典与统一扫描</a>
+<div class="group">证据：从方向标签到条件概率</div>
+<a class="nav" href="pattern-scoring.html">第9章 形态汇聚、冲突与概率评分</a>
+<a class="nav" href="trend.html">第10章 趋势、支撑阻力与极性转换</a>
+<a class="nav" href="percentage.html">第11章 蜡烛图与百分比回撤水平</a>
+<a class="nav" href="ma.html">第12章 蜡烛图与移动平均线</a>
+<a class="nav" href="rsi.html">第13章 蜡烛图与摆动指标</a>
+<a class="nav" href="obv.html">第14章 蜡烛图与成交量：OBV、CMF与VWAP</a>
+<a class="nav" href="waves.html">第15章 蜡烛图与波段结构</a>
+<a class="nav" href="profile.html">第16章 蜡烛图与成交量价格剖面</a>
+<div class="group">决策：从候选信号到风险暴露</div>
+<a class="nav" href="option.html">第17章 蜡烛图与期权决策</a>
+<a class="nav" href="hedging.html">第18章 蜡烛图与动态套期保值</a>
+<a class="nav" href="comprehensive.html">第19章 从形态到可运行研究：综合案例</a>
+<div class="group">附录</div>
+<a class="nav" href="sound.html">附录 复现环境、API字典与研究审计</a>
+<a class="nav active" href="references.html">参考文献</a></nav>
+<main><section id="参考文献" class="level1">
+<h1>参考文献</h1>
+<p>本书引用文献按作者—年份顺序列出。正文中的引用以括号标注，例如 <span class="citation" data-cites="nison2001">(Nison 2001)</span>。</p>
+<p><span class="citation" data-cites="xie2015">Xie (2015)</span></p>
+<p><span class="citation" data-cites="nison2001">Nison (2001)</span></p>
+<p><span class="citation" data-cites="lo2000">Lo, Mamaysky, and Wang (2000)</span></p>
+<p><span class="citation" data-cites="sullivan1999">Sullivan, Timmermann, and White (1999)</span></p>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-lo2000" class="csl-entry" role="listitem">
 Lo, Andrew W., Harry Mamaysky, and Jiang Wang. 2000. <span>“Foundations of Technical Analysis: Computational Algorithms, Statistical Inference, and Empirical Implementation.”</span> <em>The Journal of Finance</em> 55 (4): 1705–65. <a href="https://doi.org/10.1111/0022-1082.00265">https://doi.org/10.1111/0022-1082.00265</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-nison2001" class="csl-entry" role="listitem">
 Nison, Steve. 2001. <em>Japanese Candlestick Charting Techniques: A Contemporary Guide to the Ancient Investment Techniques of the Far East</em>. 2nd ed. Prentice Hall Press.
 </div>
-<div class="csl-entry">
+<div id="ref-sullivan1999" class="csl-entry" role="listitem">
 Sullivan, Ryan, Allan Timmermann, and Halbert White. 1999. <span>“Data-Snooping, Technical Trading Rule Performance, and the Bootstrap.”</span> <em>The Journal of Finance</em> 54 (5): 1647–91. <a href="https://doi.org/10.1111/0022-1082.00163">https://doi.org/10.1111/0022-1082.00163</a>.
 </div>
-<div class="csl-entry">
+<div id="ref-xie2015" class="csl-entry" role="listitem">
 Xie, Yihui. 2015. <em>Dynamic Documents with <span>R</span> and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/">http://yihui.name/knitr/</a>.
 </div>
-<div class="csl-entry">
-———. 2026. <em>Bookdown: Authoring Books and Technical Documents with r Markdown</em>. <a href="https://github.com/rstudio/bookdown">https://github.com/rstudio/bookdown</a>.
 </div>
-</div>
-</div>
-            </section>
-
-          </div>
-        </div>
-      </div>
-<a href="sound.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
-    </div>
-  </div>
-<script src="libs/gitbook/js/app.min.js"></script>
-<script src="libs/gitbook/js/clipboard.min.js"></script>
-<script src="libs/gitbook/js/plugin-search.js"></script>
-<script src="libs/gitbook/js/plugin-sharing.js"></script>
-<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook/js/jquery.highlight.js"></script>
-<script src="libs/gitbook/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-  "sharing": {
-    "github": false,
-    "facebook": false,
-    "twitter": true,
-    "linkedin": false,
-    "weibo": false,
-    "instapaper": false,
-    "vk": false,
-    "whatsapp": false,
-    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-  },
-  "fontsettings": {
-    "theme": "white",
-    "family": "sans",
-    "size": 2
-  },
-  "edit": {
-    "link": null,
-    "text": null
-  },
-  "history": {
-    "link": null,
-    "text": null
-  },
-  "view": {
-    "link": null,
-    "text": null
-  },
-  "download": ["ai-candlestick-analysis.pdf", "ai-candlestick-analysis.epub"],
-  "search": {
-    "engine": "fuse",
-    "options": null
-  },
-  "toc": {
-    "collapse": "none"
-  }
-});
-});
-</script>
-
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
-</body>
-
-</html>
+</section>
+<div class="pager"><a href="sound.html"><small>← 上一章</small>附录 复现环境、API字典与研究审计</a></div>
+<div class="footer">淮午 · AI时代的蜡烛图分析 · 开源书稿 · <a href="https://github.com/dengyishuo/ai-candlestick-analysis">GitHub</a></div>
+</main>
+<script src="assets/search.js"></script></body></html>

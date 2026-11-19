@@ -2,7 +2,7 @@
 
 **在线阅读**：<https://dengyishuo.github.io/ai-candlestick-analysis/>
 
-这里保存独立的《AI时代的蜡烛图分析》bookdown工程。全书包含19章正文与复现附录，用 `xquant-work/My-Pkg` 的R/Python双生态把图形经验改写为可计算、可复现、可证伪的研究。
+《AI时代的蜡烛图分析》开源书稿。全书 19 章正文与复现附录，用 R / Python 双生态把图形经验改写为可计算、可复现、可证伪的研究。
 
 全书以形态结构为主线、方向含义为辅线：
 
@@ -13,15 +13,29 @@
 
 每个形态章再区分看涨、看跌和中性候选。方向标签表示条件性研究假设，不表示确定预测。
 
-- 书稿入口：`index.Rmd`
-- 章节顺序：`_bookdown.yml`
-- RStudio 项目：`AI时代的蜡烛图分析.Rproj`
-- HTML成书：`docs/index.html`（GitHub Pages 发布目录，由 `_book/` 同步而来）
-- PDF成书：`docs/ai-candlestick-analysis.pdf`（亦见 `output/pdf/AI时代的蜡烛图分析.pdf`）
-- 自动检查：`scripts/check_book.R`、`scripts/validate_python.py`
-- 历史构建快照：`_book-archive/`
+## 内容结构
 
-```r
-bookdown::render_book("index.Rmd", "bookdown::gitbook")
-bookdown::render_book("index.Rmd", "bookdown::pdf_book")
+- **源稿**：`manuscript/*.md`（22 个纯 Markdown 文件，唯一维护入口）
+- **配图**：`manuscript/figures/*.png`（38 张，已固化）
+- **站点**：`docs/`（GitHub Pages 发布目录，由构建脚本生成）
+- **参考文献**：`book.bib`
+- **历史版本**：`.workbuddy-backup/2026-11-19-pandoc-migration/`（旧 `.Rmd` 与旧站点快照）
+
+## 构建方式
+
+已**从 bookdown/R Markdown 迁移到纯 Markdown + pandoc**，构建不再依赖 R、knitr 或 bookdown。统计表与配图均已静态化，阅读与再构建只需 pandoc（本机 3.7+）：
+
+```bash
+python3 scripts/build_site.py
 ```
+
+脚本读取 `manuscript/` 下的 Markdown，用 pandoc（含 citeproc 处理引用、MathJax 渲染公式）生成带侧边栏导航、上下章、客户端搜索的静态站点，输出到 `docs/`。源文件维护只改 Markdown，不要直接编辑 `docs/`。
+
+`scripts/convert_rmd_to_md.py` 是一次性迁移脚本（Rmd → Markdown），仅在需要从历史 `.Rmd` 重新转换时使用。
+
+## 旧版产物（归档，非构建依赖）
+
+- `docs/ai-candlestick-analysis.pdf`：旧排版 PDF，仅作下载保留
+- `数据/`：`data/aapl_daily.csv.gz`（研究冻结数据）
+- `R/`、`python/`、`scripts/check_book.R`、`scripts/validate_python.py`：研究复现代码与检查脚本
+- `AUTHORING_GUIDE.md`：写作规范
