@@ -29,3 +29,6 @@ missfont.log
 __pycache__/
 *.pyc
 .DS_Store
+
+# docs 是发布目录，图片等资源必须随站点一起提交
+!docs/ai-candlestick-analysis_files/
