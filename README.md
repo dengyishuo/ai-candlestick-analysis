@@ -19,7 +19,7 @@
 - **配图**：`manuscript/figures/*.png`（38 张，已固化）
 - **站点**：`docs/`（GitHub Pages 发布目录，由构建脚本生成）
 - **参考文献**：`book.bib`
-- **历史版本**：`.workbuddy-backup/2026-11-19-pandoc-migration/`（旧 `.Rmd` 与旧站点快照）
+- **历史版本**：`.workbuddy-backup/2026-11-19-pandoc-migration/`（旧 `.Rmd` 与旧站点快照）；bookdown/LaTeX 配置已清理，备份见工作区 `.workbuddy/backup/2026-11-19-latex-cleanup/`
 
 ## 构建方式
 
@@ -31,7 +31,7 @@ python3 scripts/build_site.py
 
 脚本读取 `manuscript/` 下的 Markdown，用 pandoc（含 citeproc 处理引用、MathJax 渲染公式）生成带侧边栏导航、上下章、客户端搜索的静态站点，输出到 `docs/`。源文件维护只改 Markdown，不要直接编辑 `docs/`。
 
-`scripts/convert_rmd_to_md.py` 是一次性迁移脚本（Rmd → Markdown），仅在需要从历史 `.Rmd` 重新转换时使用。
+`scripts/convert_rmd_to_md.py` 是一次性迁移脚本（Rmd → Markdown），仅作存档——历史 `.Rmd` 与 LaTeX/bookdown 配置已从仓库移除，如需取回请用 `.workbuddy-backup/2026-11-19-pandoc-migration/` 和工作区备份目录。
 
 ## 旧版产物（归档，非构建依赖）
 
