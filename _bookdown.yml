@@ -1,0 +1,35 @@
+book_filename: ai-candlestick-analysis
+delete_merged_file: true
+new_session: false
+before_chapter_script: ["R/book_setup.R"]
+rmd_files:
+  - index.Rmd
+  - 01-introduction.Rmd
+  - 02-candle.Rmd
+  - 03-single-candle.Rmd
+  - 04-two-candle.Rmd
+  - 05-multi-candle.Rmd
+  - 06-gap-continuation.Rmd
+  - 07-doji-failure.Rmd
+  - 08-pattern-dictionary.Rmd
+  - 09-pattern-scoring.Rmd
+  - 10-trend.Rmd
+  - 11-percentage.Rmd
+  - 12-ma.Rmd
+  - 13-rsi.Rmd
+  - 14-obv.Rmd
+  - 15-waves.Rmd
+  - 16-profile.Rmd
+  - 17-option.Rmd
+  - 18-hedging.Rmd
+  - 19-comprehensive.Rmd
+  - 21-hmm.Rmd
+  - 22-references.Rmd
+clean: [packages.bib, ai-candlestick-analysis.bbl]
+language:
+  label:
+    fig: "图 "
+    tab: "表 "
+  ui:
+    edit: "编辑"
+    chapter_name: ["第 ", " 章"]
